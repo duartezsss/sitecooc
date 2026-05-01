@@ -95,7 +95,8 @@ export default async function handler(req, res) {
                 const frontend_response = {
                     hash: transaction_data.id || reference,
                     pix: {
-                        pix_qr_code: transaction_data.qr_code || '',
+                        pix_qr_code: transaction_data.qr_code || transaction_data.pix_qr_code || '',
+                        pix_qr_code_base64: transaction_data.qr_code_base64 || transaction_data.pix_qr_code_base64 || '',
                         expiration_date: transaction_data.expires_at || null
                     }
                 };
