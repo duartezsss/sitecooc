@@ -11,10 +11,8 @@ export default async function handler(req, res) {
             return res.status(400).json({ success: false, error: 'Missing hash' });
         }
 
-        if (!token || hash.startsWith('mock_')) {
-            // Mock randomly paid for demonstration
-            const isPaid = Math.random() > 0.7;
-            return res.status(200).json({ success: true, status: isPaid ? 'paid' : 'pending' });
+        if (!token) {
+            return res.status(401).json({ success: false, error: 'Token missing' });
         }
 
         const backendRes = await fetch(`https://multi.paradisepags.com/api/v1/check_status.php?hash=${hash}`, {

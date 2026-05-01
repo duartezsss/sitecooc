@@ -8,16 +8,7 @@ export default async function handler(req, res) {
         const body = req.body;
 
         if (!token) {
-            // Emulate for testing when no token
-            return res.status(200).json({
-                success: true,
-                pix: {
-                    qr_code_base64: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
-                    qr_code: "00020126580014br.gov.bcb.pixmocked-code1234",
-                    hash: "mock_" + Date.now(),
-                    expires_in: 5
-                }
-            });
+            return res.status(401).json({ success: false, error: 'Token PIX_API_TOKEN is missing from environment.' });
         }
 
         const backendRes = await fetch("https://multi.paradisepags.com/api/v1/transaction.php", {
@@ -36,13 +27,15 @@ export default async function handler(req, res) {
         });
 
         const data = await backendRes.json();
+        console.log("[PIX API] Gateway response:", data);
         
-        if (data && data.qr_code) {
+        if (backendRes.ok && data) {
             return res.status(200).json({ success: true, pix: data });
         }
 
-        return res.status(400).json({ success: false, error: "Failed from Gateway" });
+        return res.status(400).json({ success: false, error: data.error || data.message || "Failed from Gateway" });
     } catch (e) {
-        return res.status(500).json({ success: false, error: "Internal Server Error" });
+        console.error("[PIX API] Execution Error:", e);
+        return res.status(500).json({ success: false, error: "Internal Server Error (" + e.message + ")" });
     }
 }

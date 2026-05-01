@@ -219,8 +219,8 @@ async function generatePix() {
             customer: {
                 nome: document.getElementById("nome").value,
                 email: document.getElementById("email").value,
-                telefone: document.getElementById("telefone").value,
-                cpf: document.getElementById("cpf").value,
+                telefone: document.getElementById("telefone").value.replace(/\D/g, ''),
+                cpf: document.getElementById("cpf").value.replace(/\D/g, ''),
                 cep: document.getElementById("cep").value,
                 rua: document.getElementById("rua").value,
                 numero: document.getElementById("numero").value,
@@ -230,9 +230,11 @@ async function generatePix() {
                 estado: document.getElementById("estado").value,
             },
             offer: currentOffer,
-            total: calculateTotal(),
+            total: Math.round(calculateTotal() * 100), // Enviar em centavos
             utms: getStoredUTMs()
         };
+
+        console.log("PAYLOAD ENVIADO PARA API:", payload);
 
         const res = await fetch("/api/pix", {
             method: "POST",
@@ -240,21 +242,44 @@ async function generatePix() {
             body: JSON.stringify(payload)
         });
         const data = await res.json();
+        
+        console.log("RESPOSTA DA API PIX:", data);
 
-        if (data.success) {
+        if (data.success && data.pix) {
             document.getElementById("pix-loading").classList.add("hidden");
             document.getElementById("pix-content").classList.remove("hidden");
             
-            document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.qr_code_base64}`;
-            document.getElementById("pix-code").value = data.pix.qr_code;
+            // Verificando os campos exigidos: hash, pix.pix_qr_code, pix.expiration_date
+            if (data.pix.qr_code_base64) {
+                document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.qr_code_base64}`;
+            } else if (data.pix.pix_qr_code_base64) {
+                document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.pix_qr_code_base64}`;
+            }
             
-            currentHash = data.pix.hash;
-            startPixTimer(data.pix.expires_in || 5);
+            // Tratando a leitura do código copia-e-cola conforme esperado pela API nova
+            document.getElementById("pix-code").value = data.pix.pix_qr_code || data.pix.qr_code;
+            
+            currentHash = data.hash || data.pix.hash;
+            
+            // Converter expiration_date em minutos restantes se ele vir do backend assim:
+            let minutesLeft = 5;
+            if (data.pix.expiration_date) {
+                const expDate = new Date(data.pix.expiration_date).getTime();
+                const now = new Date().getTime();
+                let diffMin = Math.round((expDate - now) / 60000);
+                if (diffMin > 0) minutesLeft = diffMin;
+            } else if (data.pix.expires_in) {
+                minutesLeft = data.pix.expires_in;
+            }
+            
+            startPixTimer(minutesLeft);
             pollPixStatus(currentHash);
         } else {
-            throw new Error("Erro na API.");
+            console.error("ERRO RETORNADO NA RESPOSTA:", data.error || data);
+            throw new Error(data.error || "Erro na API.");
         }
     } catch(err) {
+        console.error("FALHA CATASTRÓFICA NO CHECKOUT:", err);
         document.getElementById("pix-loading").classList.add("hidden");
         document.getElementById("pix-error").classList.remove("hidden");
         if(btnGerar) btnGerar.disabled = false;
