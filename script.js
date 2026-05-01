@@ -246,10 +246,13 @@ async function generatePix() {
             const pixCodeText = data.pix.pix_qr_code || data.pix.qr_code || "ERRO AO CARREGAR CÓDIGO";
             document.getElementById("pix-code").value = pixCodeText;
             
-            if (data.pix.qr_code_base64) {
-                document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.qr_code_base64}`;
-            } else if (data.pix.pix_qr_code_base64) {
-                document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.pix_qr_code_base64}`;
+            let base64Code = data.pix.qr_code_base64 || data.pix.pix_qr_code_base64;
+            if (base64Code) {
+                if (base64Code.startsWith("data:image")) {
+                    document.getElementById("qr-code-img").src = base64Code;
+                } else {
+                    document.getElementById("qr-code-img").src = `data:image/png;base64,${base64Code}`;
+                }
             } else {
                 // Fallback dinâmico caso a API não devolva imagem, apenas o texto
                 document.getElementById("qr-code-img").src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCodeText)}`;
