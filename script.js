@@ -243,25 +243,22 @@ async function generatePix() {
             document.getElementById("pix-loading").classList.add("hidden");
             document.getElementById("pix-content").classList.remove("hidden");
             
+            const pixCodeText = data.pix.pix_qr_code || data.pix.qr_code || "ERRO AO CARREGAR CÓDIGO";
+            document.getElementById("pix-code").value = pixCodeText;
+            
             if (data.pix.qr_code_base64) {
                 document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.qr_code_base64}`;
             } else if (data.pix.pix_qr_code_base64) {
                 document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.pix_qr_code_base64}`;
+            } else {
+                // Fallback dinâmico caso a API não devolva imagem, apenas o texto
+                document.getElementById("qr-code-img").src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCodeText)}`;
             }
-            
-            document.getElementById("pix-code").value = data.pix.pix_qr_code || data.pix.qr_code || "ERRO AO CARREGAR CÓDIGO";
             
             currentHash = data.hash || data.pix.hash;
             
+            // Forçando timer de 5 minutos, visto que o backend envia default de 48h
             let minutesLeft = 5;
-            if (data.pix.expiration_date) {
-                const expDate = new Date(data.pix.expiration_date).getTime();
-                const now = new Date().getTime();
-                let diffMin = Math.round((expDate - now) / 60000);
-                if (diffMin > 0) minutesLeft = diffMin;
-            } else if (data.pix.expires_in) {
-                minutesLeft = data.pix.expires_in;
-            }
             
             startPixTimer(minutesLeft);
             pollPixStatus(currentHash);
