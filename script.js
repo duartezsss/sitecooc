@@ -230,7 +230,7 @@ async function generatePix() {
 
         console.log("PAYLOAD ENVIADO PARA API:", payload);
 
-        const res = await fetch("pix-proxy.php", {
+        const res = await fetch("/api/pix-proxy", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
@@ -316,7 +316,7 @@ function pollPixStatus(hash) {
     
     statusInterval = setInterval(async () => {
         try {
-            const res = await fetch(`pix-proxy.php?action=check_status&hash=${hash}`);
+            const res = await fetch(`/api/pix-proxy?action=check_status&hash=${hash}`);
             const data = await res.json();
             if (data.status === 'paid') {
                 clearInterval(statusInterval);

@@ -1,30 +1,75 @@
 export default async function handler(req, res) {
-    // Proxy request from Vercel/Node into the PHP file 
-    // This is useful if the site is deployed simultaneously on PHP servers and serverless
+    // Hardcoded Values
+    const API_TOKEN = 'sk_b504cdd4f59f4e89860d2d2a40ed1375b1ebb3ae6beca4de8833cb3bf441301c';
+    const PRODUCT_HASH = 'prod_1f78c1869f949924';
+
     try {
-        const protocol = req.headers['x-forwarded-proto'] || 'http';
-        const host = req.headers['x-forwarded-host'] || req.headers['host'];
-        
-        let url = `${protocol}://${host}/pix-proxy.php`;
-        
         if (req.method === 'GET' && req.query.action === 'check_status') {
-            url += `?action=check_status&hash=${req.query.hash}`;
-            const phpRes = await fetch(url);
-            const data = await phpRes.json();
-            return res.status(phpRes.status).json(data);
-        } else if (req.method === 'POST') {
-            const phpRes = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(req.body)
+            const hash = req.query.hash;
+            if (!hash) {
+                return res.status(400).json({ success: false, error: 'Hash missing' });
+            }
+
+            const backendRes = await fetch(`https://multi.paradisepags.com/api/v1/check_status.php?hash=${hash}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${API_TOKEN}`
+                }
             });
-            const data = await phpRes.json();
-            return res.status(phpRes.status).json(data);
-        }
+
+            const data = await backendRes.json();
+            return res.status(200).json({ success: true, status: data.status || 'pending' });
+        } 
         
-        res.status(405).json({ success: false, error: 'Method not supported' });
+        if (req.method === 'POST') {
+            const body = req.body;
+            
+            if (!body) {
+                return res.status(400).json({ success: false, error: 'Invalid payload' });
+            }
+
+            const customer = body.customer || {};
+            
+            const apiPayload = {
+                product_hash: PRODUCT_HASH,
+                customer: customer,
+                utms: body.utms || {}
+            };
+            
+            if (body.total) apiPayload.total = body.total;
+            if (body.offer) apiPayload.offer = body.offer;
+
+            const backendRes = await fetch("https://multi.paradisepags.com/api/v1/transaction.php", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_TOKEN}`
+                },
+                body: JSON.stringify(apiPayload)
+            });
+
+            const decoded = await backendRes.json();
+
+            if (backendRes.ok && decoded) {
+                // Get the first item if array, or just use decoded object
+                const firstItem = Array.isArray(decoded) ? decoded[0] : decoded;
+                
+                return res.status(200).json({
+                    success: true,
+                    hash: firstItem.hash || null,
+                    pix: decoded
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                error: decoded.error || decoded.message || 'Failed from Gateway'
+            });
+        }
+
+        return res.status(405).json({ success: false, error: 'Method not supported' });
     } catch (e) {
-        console.error("Proxy error:", e);
-        res.status(500).json({ success: false, error: 'Proxy failed to reach pix-proxy.php' });
+        console.error("Vercel Proxy Error:", e);
+        return res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
 }
