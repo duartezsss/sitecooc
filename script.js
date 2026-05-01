@@ -237,9 +237,9 @@ async function generatePix() {
         });
         const data = await res.json();
         
-        console.log("RESPOSTA COMPLETA DA API PIX:", data);
+        console.log("RESPOSTA COMPLETA DA API PIX:", JSON.stringify(data));
 
-        if (data.success && data.pix) {
+        if ((data.success !== false) && data.pix) {
             document.getElementById("pix-loading").classList.add("hidden");
             document.getElementById("pix-content").classList.remove("hidden");
             
@@ -266,8 +266,8 @@ async function generatePix() {
             startPixTimer(minutesLeft);
             pollPixStatus(currentHash);
         } else {
-            console.error("ERRO REAL DA API PIX:", data.error || data);
-            throw new Error(data.error || "Failed from Gateway");
+            console.error("ERRO REAL DA API PIX:", JSON.stringify(data));
+            throw new Error(data.error || data.message || "Failed from Gateway");
         }
     } catch(err) {
         console.error("FALHA CATASTRÓFICA NO CHECKOUT:", err);
