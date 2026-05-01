@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SonoFix | O Travesseiro Ergonômico de Alta Conversão</title>
+    <meta name="description" content="O SonoFix foi desenvolvido para manter sua cabeça, pescoço e coluna alinhados durante a noite, proporcionando noites de sono muito melhores.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- UTMify Pixel -->
+    <script>
+      window.pixelId = "69f423919f50112faf99f77a";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+</head>
+<body>
+
+    <!-- Landing Page Content -->
+    <div id="landing-page">
+        <!-- Topo / Hero Section -->
+        <section class="hero bg-dark text-center">
+            <div class="container">
+                <img src="assets/logo/sonofixlogo.png" alt="Logo SonoFix" class="main-logo">
+                <h1 class="headline">Elimine dores nas costas e pescoço enquanto você dorme</h1>
+                
+                <div class="vsl-wrapper mt-2">
+                    <video controls poster="assets/explicacao/suacolunaperfeita.jpg" class="vsl-video">
+                        <source src="assets/vsl.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+
+                <div class="benefits-list">
+                    <ul>
+                        <li><span class="check">✔</span> Elimine dores no pescoço, cervical, lombar e quadris</li>
+                        <li><span class="check">✔</span> Durma melhor e reduza o ronco</li>
+                        <li><span class="check">✔</span> Acorde sem dor e com mais disposição</li>
+                        <li><span class="check">✔</span> Alinhamento perfeito da coluna</li>
+                        <li><span class="check">✔</span> Desenvolvido por especialistas</li>
+                        <li><span class="check">✔</span> Indicado para todas as idades</li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary btn-pulse" onclick="scrollToOffers()">QUERO COMPRAR AGORA</button>
+            </div>
+        </section>
+
+        <!-- Autoridade (Especialistas) -->
+        <section class="authority bg-green-accent text-center text-white">
+            <div class="container">
+                <h2>O que a mídia e especialistas dizem</h2>
+                <div class="vsl-wrapper" style="margin-top: 20px;">
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/WASCHO9IyGY?start=5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
+                </div>
+                <p class="expert-text">"Dormir bem é essencial para o funcionamento do cérebro, reparação muscular e bem-estar geral. Travesseiros ergonômicos como o SonoFix são o futuro da saúde preventiva do sono." <br><br><strong>- Marcos Almeida (Especialista em Coluna)</strong></p>
+                <button class="btn btn-secondary w-100-mobile" style="color:#01ab5a; max-width: 400px; padding: 20px;" onclick="scrollToOffers()">QUERO DORMIR MELHOR</button>
+            </div>
+        </section>
+
+        <!-- Dores do Cliente -->
+        <section class="pains bg-gray text-center">
+            <div class="container">
+                <h2 class="title-dark">Você sofre de algum desses problemas?</h2>
+                <div class="grid grid-2x2">
+                    <div class="pain-card">
+                        <img src="assets/Dores/doresnopescoco.png" alt="Dor no pescoço">
+                        <h4>Dor no pescoço / coluna</h4>
+                    </div>
+                    <div class="pain-card">
+                        <img src="assets/Dores/dorescronicasdecabeca.png" alt="Dores de cabeça">
+                        <h4>Dores de cabeça</h4>
+                    </div>
+                    <div class="pain-card">
+                        <img src="assets/Dores/insoniaroncos.png" alt="Insônia e Ronco">
+                        <h4>Insônia / ronco</h4>
+                    </div>
+                    <div class="pain-card">
+                        <img src="assets/Dores/estresseansiedade.png" alt="Estresse">
+                        <h4>Estresse / ansiedade</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos -->
+        <section class="testimonials bg-light text-center">
+            <div class="container">
+                <h2>Quem experimenta, recomenda</h2>
+                
+                <div class="carousel-container mt-2">
+                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">❮</button>
+                    <div class="carousel-track" id="testimonial-track">
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentoanapaula.mp4"></video>
+                            <p class="author">Elineide</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentocleide.mp4"></video>
+                            <p class="author">Cleide</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentomaria.mp4"></video>
+                            <p class="author">Maria</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentoalex.mp4"></video>
+                            <p class="author">Alex</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentoalfredo.mp4"></video>
+                            <p class="author">Alfredo</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentoandreia.mp4"></video>
+                            <p class="author">Andreia</p>
+                        </div>
+                        <div class="carousel-item">
+                            <video controls class="reel-video" src="assets/depoimentos/depoimentomarli.mp4"></video>
+                            <p class="author">Marli</p>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">❯</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explicação do Produto -->
+        <section class="explanation bg-gray text-center">
+            <div class="container">
+                <h2 style="margin-bottom: 40px;">Sua coluna alinhada em qualquer posição</h2>
+                <div class="grid grid-2-col align-center">
+                    <img src="assets/explicacao/suacolunaperfeita.jpg" alt="Alinhamento Coluna" class="img-fluid rounded">
+                    <div class="text-left-align">
+                        <p class="lead-text">O formato inovador em borboleta permite encaixe ideal e suave entre o ombro e o pescoço.</p>
+                        <p>Nossa espuma de memória distribui o peso de forma igualitária, zerando os pontos de pressão. Seja de lado, de barriga para cima ou bruços, sua curvatura natural é preservada evitando danos nos discos vertebrais e dores pela manhã.</p>
+                        <button class="btn btn-primary mt-2 btn-pulse w-100-mobile" onclick="scrollToOffers()">VER OPÇÕES DE KIT</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Copy / Imagens estilo Blog -->
+        <section class="blog-style bg-light">
+            <div class="container">
+                <div class="grid grid-2-col align-center reverse-mobile">
+                    <div class="text-left-align">
+                        <h2 style="text-align: left;">Elimine as dores causadas pelo travesseiro comum</h2>
+                        <p>Travesseiros comuns geram pontos de tensão e deixam o pescoço pendurado. O SonoFix elimina esse espaço morto das suas noites.</p>
+                        <div class="review-box mt-2">
+                            <div class="stars text-yellow">★★★★★</div>
+                            <p>"A diferença é gritante entre o meu travesseiro velho e esse. Recomendo muito!"</p>
+                        </div>
+                    </div>
+                    <img src="assets/explicacao/sonofixxtravesseirocomum.jpg" alt="Comparação" class="img-fluid rounded">
+                </div>
+                
+                <div class="grid grid-2-col align-center mt-2-grid">
+                    <img src="assets/explicacao/tecnologiaavancada.gif" alt="Tecnologia Espuma" class="img-fluid rounded">
+                    <div class="text-left-align">
+                        <h2 style="text-align: left;">Dimensões pensadas sob medida</h2>
+                        <p>Feito em espuma de poliuretano viscoelástica injetada de alta densidade aprovada por ortopedistas.</p>
+                        <ul class="clean-list">
+                            <li>Lado maior para dormir de lado</li>
+                            <li>Lado menor para dormir de costas</li>
+                            <li>Capa respirável e lavável</li>
+                            <li>Antialérgico e anti-ácaro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Offers -->
+        <section id="ofertas" class="offers bg-dark text-center">
+            <div class="container">
+                <h2>Escolha seu kit abaixo</h2>
+                <div class="grid col-4 offers-grid" style="margin-top: 60px;">
+                    <!-- Offer 1 -->
+                    <div class="card offer-card">
+                        <img src="assets/travesseiros/1travesseiro.png" alt="1 Unidade" class="offer-img">
+                        <h3>1 unidade</h3>
+                        <p class="price">Por apenas <br><span class="big-price">R$ 24,04</span></p>
+                        <button class="btn btn-primary w-100" onclick="startCheckout('1x', 24.04)">COMPRAR AGORA</button>
+                        <p class="frete-text">✈ FRETE GRÁTIS PARA TODO BRASIL</p>
+                    </div>
+                    <!-- Offer 2 -->
+                    <div class="card offer-card">
+                        <img src="assets/travesseiros/2travesseiros-Photoroom.png" alt="2 Unidades" class="offer-img">
+                        <h3>2 unidades</h3>
+                        <p class="price">Por apenas <br><span class="big-price">R$ 39,53</span></p>
+                        <button class="btn btn-primary w-100" onclick="startCheckout('2x', 39.53)">COMPRAR AGORA</button>
+                        <p class="frete-text">✈ FRETE GRÁTIS PARA TODO BRASIL</p>
+                    </div>
+                    <!-- Offer 3 -->
+                    <div class="card offer-card best-seller">
+                        <div class="badge">MAIS VENDIDO</div>
+                        <img src="assets/travesseiros/3-Photoroom.png" alt="3 Unidades" class="offer-img scale-img">
+                        <h3>3 unidades</h3>
+                        <p class="price">Por apenas <br><span class="big-price">R$ 53,93</span></p>
+                        <button class="btn btn-primary w-100 btn-pulse" onclick="startCheckout('3x', 53.93)">COMPRAR AGORA</button>
+                        <p class="frete-text">✈ FRETE GRÁTIS PARA TODO BRASIL</p>
+                    </div>
+                    <!-- Offer 4 -->
+                    <div class="card offer-card best-value">
+                        <div class="badge">MELHOR CUSTO</div>
+                        <img src="assets/travesseiros/4-Photoroom.png" alt="4 Unidades" class="offer-img scale-img">
+                        <h3>4 unidades</h3>
+                        <p class="price">Por apenas <br><span class="big-price">R$ 66,11</span></p>
+                        <button class="btn btn-primary w-100" onclick="startCheckout('4x', 66.11)">COMPRAR AGORA</button>
+                        <p class="frete-text">✈ FRETE GRÁTIS PARA TODO BRASIL</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Avaliações Texto -->
+        <section class="text-feedbacks bg-light">
+            <div class="container max-w-sm">
+                <h2 class="text-green text-center" style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 900;">AVALIAÇÕES MAIS RECENTES DE CLIENTES</h2>
+                <div class="feedback-summary">
+                    <span>527 Avaliações de clientes recebidas. Média: <span class="stars text-yellow">★★★★★</span> (4.5)</span>
+                </div>
+
+                <div class="feedback-list">
+                    <!-- Item 1 -->
+                    <div class="feedback-item">
+                        <div class="feedback-user">
+                            <div class="rating-number">5</div>
+                            <div class="stars text-yellow">★★★★★</div>
+                            <strong>Jose Egmont</strong>
+                            <p class="verified">✔ Compra Verificada</p>
+                            <p class="date">17/02/2026</p>
+                        </div>
+                        <div class="feedback-content">
+                            <p>Eu estava sofrendo com dores no pescoço todos os dias. O SonoFix resolveu isso na primeira semana, recomendo demais!</p>
+                            <p class="recommend">👍 Sim, recomendaria este produto a um amigo.</p>
+                            <img src="assets/feedbacks/jose-egmont-69945f25a389c_thumb.jpg" alt="Foto cliente" class="feedback-thumb">
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="feedback-item">
+                        <div class="feedback-user">
+                            <div class="rating-number">5</div>
+                            <div class="stars text-yellow">★★★★★</div>
+                            <strong>Frank Brant</strong>
+                            <p class="verified">✔ Compra Verificada</p>
+                            <p class="date">12/11/2025</p>
+                        </div>
+                        <div class="feedback-content">
+                            <p>Produto de excelente qualidade. Minhas crises de torcicolo simplesmente acabaram.</p>
+                            <p class="recommend">👍 Sim, recomendaria este produto a um amigo.</p>
+                            <img src="assets/feedbacks/8728e4ce-73a1-4347-be71-ea9ddb05c4d9.avif" alt="Foto cliente" class="feedback-thumb">
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="feedback-item">
+                        <div class="feedback-user">
+                            <div class="rating-number">5</div>
+                            <div class="stars text-yellow">★★★★★</div>
+                            <strong>Daniela Amoras</strong>
+                            <p class="verified">✔ Compra Verificada</p>
+                            <p class="date">05/01/2026</p>
+                        </div>
+                        <div class="feedback-content">
+                            <p>Sempre acordava com dor nas costas, mesmo trocando de colchão. O travesseiro me ajudou a alinhar a postura e agora durmo muito melhor.</p>
+                            <p class="recommend">👍 Sim, recomendaria este produto a um amigo.</p>
+                            <img src="assets/feedbacks/D_NQ_NP_2X_783859-MLA110343812603_042026-F.webp" alt="Foto cliente" class="feedback-thumb">
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="feedback-item">
+                        <div class="feedback-user">
+                            <div class="rating-number">4</div>
+                            <div class="stars text-yellow">★★★★☆</div>
+                            <strong>Helena Maria</strong>
+                            <p class="verified">✔ Compra Verificada</p>
+                            <p class="date">28/12/2025</p>
+                        </div>
+                        <div class="feedback-content">
+                            <p>Muito bom, demorou uns dois dias pra me acostumar com o formato, mas depois minhas dores de cabeça tensionais foram embora.</p>
+                            <p class="recommend">👍 Sim, recomendaria este produto a um amigo.</p>
+                            <img src="assets/feedbacks/D_NQ_NP_2X_871999-MLA110296080611_042026-F.webp" alt="Foto cliente" class="feedback-thumb">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-2">
+                    <button id="btn-load-more" class="btn btn-secondary w-100" style="max-width: 400px; color:#01ab5a; font-weight:800; border: 1px solid #01ab5a;" onclick="loadMoreFeedbacks()">Carregar mais avaliações</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee -->
+        <section class="guarantee bg-gray text-center text-dark">
+            <div class="container">
+                <h2>Garantia de 30 Dias</h2>
+                <p>Seja 100% de satisfação ou devolvemos seu dinheiro sem ressentimentos.</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-accordion bg-light">
+            <div class="container max-w-sm">
+                <h2 class="text-center" style="margin-bottom:30px; font-weight:900;">Perguntas mais frequentes sobre o <br><span class="text-green">SonoFix</span></h2>
+                <div class="accordion">
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">Quais são os preços? <span>+</span></div>
+                        <div class="accordion-content"><p>Aproveite nossa promoção com kits a partir de parcelas de R$ 24,04.</p></div>
+                    </div>
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">Como comprar? <span>+</span></div>
+                        <div class="accordion-content"><p>Basta escolher o kit desejado e preencher seus dados totalmente seguros na nossa página de pagamentos.</p></div>
+                    </div>
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">De qual material é feito? <span>+</span></div>
+                        <div class="accordion-content"><p>É feito de espuma de poliuretano viscoelástica injetada de alta densidade.</p></div>
+                    </div>
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">Qual é a durabilidade do SonoFix? <span>+</span></div>
+                        <div class="accordion-content"><p>A espuma de memória não deforma e foi projetada para durar anos.</p></div>
+                    </div>
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">Quais são as formas de pagamento? <span>+</span></div>
+                        <div class="accordion-content"><p>Aceitamos Pix, Cartão de Crédito e Boleto Bancário.</p></div>
+                    </div>
+                    <div class="accordion-item" onclick="this.classList.toggle('active')">
+                        <div class="accordion-title">Tem alguma garantia? <span>+</span></div>
+                        <div class="accordion-content"><p>Sim, oferecemos 30 dias de garantia com risco zero.</p></div>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 40px;">
+                    <button class="btn btn-primary btn-pulse" onclick="scrollToOffers()">QUERO COMPRAR AGORA</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer bg-gray text-center">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col" style="text-align: left;">
+                        <h4 style="color:#000; font-weight:900;">SonoFix ®</h4>
+                        <p>Metafor Comércio e Serviços Ltda.<br>CNPJ: 49.390.866/0001-45</p>
+                        <h5 style="margin-top:20px; color:#000; font-weight:900;">Endereço:</h5>
+                        <p>Av Setecentos s/n, Quadra 17, Galpao 1,2,3 e 4<br>- Sala 17, Terminal Intermodal da Serra,<br>Serra/ES, CEP 29.161-414</p>
+                        <h5 style="margin-top:20px; color:#000; font-weight:900;">Email:</h5>
+                        <p>contato@sonofix.com.br</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4 style="color:#000; font-weight:900;">Formas de pagamento</h4>
+                        <p style="margin-top:10px;">Cartão de Crédito, Pix e Boleto</p>
+                    </div>
+                    <div class="footer-col footer-buttons">
+                        <button class="btn" style="background:#e2e8f0; border: 1px solid #1a1a1a; width:100%; color:#000; margin-bottom:15px; font-weight:900;">ATENDIMENTO AO CLIENTE</button>
+                        <button class="btn" style="background:#e2e8f0; border: 1px solid #1a1a1a; width:100%; color:#000; font-weight:900;">RASTREAR PEDIDO</button>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidade</a> • 
+                    <a href="#">Termos e Condições</a> • 
+                    <a href="#">Trocas e Devoluções</a> • 
+                    <a href="#">Política de Reembolso</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Checkout Modal / Overlay -->
+    <div id="checkout-overlay" class="hidden">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <button class="btn-back" onclick="closeCheckout()">← Voltar</button>
+                <h2>Finalizar Pedido</h2>
+            </div>
+            
+            <div class="checkout-layout">
+                <!-- Left area: Forms -->
+                <div class="checkout-form-area">
+                    <div class="step-indicator">
+                        <span id="step-indicator-1" class="active">1. Dados</span> -> 
+                        <span id="step-indicator-2">2. Entrega</span> -> 
+                        <span id="step-indicator-3">3. Pagamento</span>
+                    </div>
+                    <div id="error-msg" class="error-msg hidden"></div>
+
+                    <!-- STEP 1: Personal Data -->
+                    <div id="step-1" class="checkout-step">
+                        <h3>Dados Pessoais</h3>
+                        <div class="form-group">
+                            <input type="text" id="nome" placeholder="Nome Completo *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="E-mail *" required>
+                        </div>
+                        <div class="form-group row">
+                            <input type="tel" id="telefone" placeholder="Telefone *" required>
+                            <input type="text" id="cpf" placeholder="CPF *" required>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="nextStep(2)">Continuar para Entrega</button>
+                    </div>
+
+                    <!-- STEP 2: Address Data -->
+                    <div id="step-2" class="checkout-step hidden">
+                        <h3>Endereço de Entrega</h3>
+                        <div class="form-group">
+                            <input type="text" id="cep" placeholder="CEP *" maxlength="8" required onkeyup="handleCepKeyup(event)">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="rua" placeholder="Rua *" required readonly>
+                        </div>
+                        <div class="form-group row">
+                            <input type="text" id="numero" placeholder="Número *" required>
+                            <input type="text" id="complemento" placeholder="Complemento">
+                        </div>
+                        <div class="form-group row">
+                            <input type="text" id="bairro" placeholder="Bairro *" required readonly>
+                            <input type="text" id="cidade" placeholder="Cidade *" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="estado" placeholder="Estado (UF) *" required readonly>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-2" onclick="nextStep(3)" id="btn-gerar-pix">Gerar Pix com Desconto</button>
+                    </div>
+
+                    <!-- STEP 3: Pix Payment -->
+                    <div id="step-3" class="checkout-step hidden text-center">
+                        <div id="pix-loading">
+                            <p>Aguarde, gerando seu Pix seguro...</p>
+                        </div>
+                        <div id="pix-content" class="hidden">
+                            <h3 class="text-green" style="margin-bottom: 20px;">Pedido Gerado com Sucesso!</h3>
+                            <p>Escaneie o QR Code abaixo pelo aplicativo do seu banco:</p>
+                            <div class="qr-code-box">
+                                <img id="qr-code-img" src="" alt="QR Code Pix" style="max-width: 200px; margin: 15px auto; border-radius: 10px; border: 2px solid #00a859; padding: 10px;">
+                            </div>
+                            <div class="pix-copy-area row" style="align-items: center; justify-content: center; gap: 10px;">
+                                <input type="text" id="pix-code" readonly>
+                                <button class="btn btn-secondary" onclick="copyPix()">Copiar</button>
+                            </div>
+                            <div class="timer text-red mt-2" id="pix-timer" style="font-weight: 700;">
+                                Tempo restante: 05:00
+                            </div>
+                            <p class="small text-gray mt-2">Aguardando pagamento automaticamente...</p>
+                        </div>
+                        <div id="pix-paid" class="hidden text-green mt-2">
+                            <h1>✅</h1>
+                            <h2>Pagamento Confirmado!</h2>
+                            <p>Sua encomenda já está sendo preparada.</p>
+                        </div>
+                        <div id="pix-error" class="hidden text-red mt-2">
+                            <h3>Ocorreu um erro ao gerar o Pix.</h3>
+                            <button class="btn btn-secondary w-100" onclick="nextStep(2)">Tentar Novamente</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right area: Summary & Order Bumps -->
+                <div class="checkout-summary-area">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="summary-card">
+                        <p id="summary-title" class="summary-title">Carregando...</p>
+                        <p id="summary-price" class="summary-price">R$ 0,00</p>
+                    </div>
+
+                    <div id="order-bumps" class="order-bumps">
+                        <h4>Aditivos (Ofertas Especiais)</h4>
+                        <!-- Bump 1 -->
+                        <label class="bump-card" id="label-bump-1">
+                            <input type="checkbox" id="bump-1" onchange="toggleBump(1)">
+                            <div class="bump-content">
+                                <strong>1x Fronha Íons de Prata</strong>
+                                <p class="bump-desc">Antialérgica e Antiviral.</p>
+                                <p class="bump-price">+ R$ 29,90</p>
+                            </div>
+                        </label>
+                        <!-- Bump 2 -->
+                        <label class="bump-card" id="label-bump-2">
+                            <input type="checkbox" id="bump-2" onchange="toggleBump(2)">
+                            <div class="bump-content">
+                                <strong>2x Fronhas Íons de Prata</strong>
+                                <p class="bump-desc">Para revezar. Mais economia.</p>
+                                <p class="bump-price">+ R$ 49,90</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="final-total" class="final-total">R$ 0,00</span>
+                    </div>
+                    <div class="secure-badge">
+                        🔒 Transação 100% segura.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function moveCarousel(direction) {
+          const track = document.getElementById('testimonial-track');
+          const scrollAmount = track.offsetWidth;
+          track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+
+      // Load More Feedbacks Logic
+      let loadCount = 0;
+      const extraFeedbacks = [
+        { name: "Luzimar Lopes", text: "Estou dormindo muito melhor. A postura se ajeitou e não acordo mais travada.", img: "assets/feedbacks/luzimar-lopes-64a45beac2ab0_thumb.jpg", stars: 5 },
+        { name: "Maria das Graças", text: "Comprei para meu marido que roncava muito. A qualidade do sono dele melhorou 100%. Recomendo!", img: "assets/feedbacks/maria-das-65d4c36580914_thumb.jpg", stars: 5 },
+        { name: "Carlos Eduardo", text: "Excelente travesseiro, alivia a pressão nos ombros maravilhosamente bem.", img: "assets/feedbacks/14899d87-6a25-4d35-a80a-b76dc76990c3_278x275.avif", stars: 5 },
+        { name: "Roberta N.", text: "Demorou 2 dias a mais para entregar, mas o produto em si cumpriu o prometido. Dores na lombar reduziram.", img: "assets/feedbacks/21317e5c-10bb-489c-b49f-762b810446f5.avif", stars: 4 },
+        { name: "Patrícia Gomes", text: "Pensei que não ia me acostumar com a espuma, mas na segunda noite já não queria outro.", img: "assets/feedbacks/34845a7e-d85c-40d9-b170-3334403a3c9e.avif", stars: 5 },
+        { name: "Sônia Aparecida", text: "Foi um divisor de águas para as minhas noites mal dormidas. Recomendo de coração, até minhas amigas compraram.", img: "assets/feedbacks/5a0a2467-e534-4c10-a190-dce1a18ae7e3.avif", stars: 5 },
+        { name: "Anderson Silva", text: "Um alívio. Acordava com dor de cabeça todo dia por causa do pescoço, o SonoFix salvou.", img: "assets/feedbacks/dd5ea186-6c8e-4fbd-bf72-e2ccb4f5acf6.avif", stars: 5 },
+        { name: "Marcos Vinícius", text: "Valeu cada centavo. Muito bom o acabamento e a capa.", img: "assets/feedbacks/f8876ca6-e086-4279-81e0-84ddc4912389.avif", stars: 5 },
+        { name: "Luciana Costa", text: "Achei a altura perfeita. Costumo dormir de lado e encaixou perfeitamente nos ombros.", img: "", stars: 5 },
+        { name: "Ricardo Mendes", text: "Bom produto. Tinha dor cervical crônica. Tem aliviado bastante de manhã.", img: "", stars: 4 },
+        { name: "João Pedro", text: "Produto maravilhoso, entrega rápida e ótimo atendimento.", img: "", stars: 5 },
+        { name: "Tânia R.", text: "Realmente alinha a coluna. Parece mágica como reduz as dores nas costas.", img: "", stars: 5 },
+        { name: "Beatriz M.", text: "Muito ergonômico, macio na medida certa, não afunda demais.", img: "", stars: 5 },
+        { name: "Fernanda L.", text: "Comprei 2 e não me arrependo. Melhor investimento na saúde.", img: "", stars: 5 },
+      ];
+
+      function loadMoreFeedbacks() {
+          if (loadCount >= 6) return;
+          
+          const feedbackList = document.querySelector('.feedback-list');
+          
+          // Generate 2 or 3 items depending on what's available
+          let numItems = 2; 
+          for (let i = 0; i < numItems; i++) {
+              if (extraFeedbacks.length === 0) break;
+              // Pick one random or sequential
+              const item = extraFeedbacks.shift();
+              
+              const div = document.createElement('div');
+              div.className = 'feedback-item';
+              
+              const starsHtml = item.stars === 5 ? '★★★★★' : '★★★★☆';
+              const imgHtml = item.img ? `<img src="${item.img}" alt="Foto cliente" class="feedback-thumb">` : '';
+              
+              div.innerHTML = `
+                  <div class="feedback-user">
+                      <div class="rating-number">${item.stars}</div>
+                      <div class="stars text-yellow">${starsHtml}</div>
+                      <strong>${item.name}</strong>
+                      <p class="verified">✔ Compra Verificada</p>
+                      <p class="date">Há poucos dias</p>
+                  </div>
+                  <div class="feedback-content">
+                      <p>${item.text}</p>
+                      <p class="recommend">👍 Sim, recomendaria este produto a um amigo.</p>
+                      ${imgHtml}
+                  </div>
+              `;
+              feedbackList.appendChild(div);
+          }
+          
+          loadCount++;
+          if (loadCount >= 6 || extraFeedbacks.length === 0) {
+              const btn = document.getElementById('btn-load-more');
+              if (btn) btn.style.display = 'none';
+          }
+      }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
