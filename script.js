@@ -217,51 +217,42 @@ async function generatePix() {
     try {
         const payload = {
             customer: {
-                nome: document.getElementById("nome").value,
+                name: document.getElementById("nome").value,
                 email: document.getElementById("email").value,
-                telefone: document.getElementById("telefone").value.replace(/\D/g, ''),
-                cpf: document.getElementById("cpf").value.replace(/\D/g, ''),
-                cep: document.getElementById("cep").value,
-                rua: document.getElementById("rua").value,
-                numero: document.getElementById("numero").value,
-                complemento: document.getElementById("complemento").value,
-                bairro: document.getElementById("bairro").value,
-                cidade: document.getElementById("cidade").value,
-                estado: document.getElementById("estado").value,
+                phone_number: document.getElementById("telefone").value.replace(/\D/g, ''),
+                document: document.getElementById("cpf").value.replace(/\D/g, '')
             },
-            offer: currentOffer,
-            total: Math.round(calculateTotal() * 100), // Enviar em centavos
-            utms: getStoredUTMs()
+            utms: getStoredUTMs(),
+            checkoutUrl: window.location.href,
+            total: Math.round(calculateTotal() * 100), // kept for backwards compatibility just in case
+            offer: currentOffer
         };
 
         console.log("PAYLOAD ENVIADO PARA API:", payload);
 
-        const res = await fetch("/api/pix", {
+        const res = await fetch("pix-proxy.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         const data = await res.json();
         
-        console.log("RESPOSTA DA API PIX:", data);
+        console.log("RESPOSTA COMPLETA DA API PIX:", data);
 
         if (data.success && data.pix) {
             document.getElementById("pix-loading").classList.add("hidden");
             document.getElementById("pix-content").classList.remove("hidden");
             
-            // Verificando os campos exigidos: hash, pix.pix_qr_code, pix.expiration_date
             if (data.pix.qr_code_base64) {
                 document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.qr_code_base64}`;
             } else if (data.pix.pix_qr_code_base64) {
                 document.getElementById("qr-code-img").src = `data:image/png;base64,${data.pix.pix_qr_code_base64}`;
             }
             
-            // Tratando a leitura do código copia-e-cola conforme esperado pela API nova
-            document.getElementById("pix-code").value = data.pix.pix_qr_code || data.pix.qr_code;
+            document.getElementById("pix-code").value = data.pix.pix_qr_code || data.pix.qr_code || "ERRO AO CARREGAR CÓDIGO";
             
             currentHash = data.hash || data.pix.hash;
             
-            // Converter expiration_date em minutos restantes se ele vir do backend assim:
             let minutesLeft = 5;
             if (data.pix.expiration_date) {
                 const expDate = new Date(data.pix.expiration_date).getTime();
@@ -275,8 +266,8 @@ async function generatePix() {
             startPixTimer(minutesLeft);
             pollPixStatus(currentHash);
         } else {
-            console.error("ERRO RETORNADO NA RESPOSTA:", data.error || data);
-            throw new Error(data.error || "Erro na API.");
+            console.error("ERRO REAL DA API PIX:", data.error || data);
+            throw new Error(data.error || "Failed from Gateway");
         }
     } catch(err) {
         console.error("FALHA CATASTRÓFICA NO CHECKOUT:", err);
@@ -325,7 +316,7 @@ function pollPixStatus(hash) {
     
     statusInterval = setInterval(async () => {
         try {
-            const res = await fetch(`/api/status?hash=${hash}`);
+            const res = await fetch(`pix-proxy.php?action=check_status&hash=${hash}`);
             const data = await res.json();
             if (data.status === 'paid') {
                 clearInterval(statusInterval);
@@ -334,6 +325,8 @@ function pollPixStatus(hash) {
                 document.getElementById("pix-content").classList.add("hidden");
                 document.getElementById("pix-paid").classList.remove("hidden");
             }
-        } catch (e) {}
+        } catch (e) {
+            console.log("Status poll failed", e);
+        }
     }, 5000);
 }
