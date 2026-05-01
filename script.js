@@ -247,15 +247,23 @@ async function generatePix() {
             document.getElementById("pix-code").value = pixCodeText;
             
             let base64Code = data.pix.qr_code_base64 || data.pix.pix_qr_code_base64;
-            if (base64Code) {
-                if (base64Code.startsWith("data:image")) {
-                    document.getElementById("qr-code-img").src = base64Code;
+            let fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCodeText)}`;
+            
+            let imgEl = document.getElementById("qr-code-img");
+            imgEl.onerror = function() {
+                console.log("Erro ao carregar imagem base64 do Pix. Usando fallback...");
+                this.onerror = null;
+                this.src = fallbackUrl;
+            };
+
+            if (base64Code && base64Code.length > 20) {
+                if (base64Code.startsWith("data:") || base64Code.startsWith("http")) {
+                    imgEl.src = base64Code;
                 } else {
-                    document.getElementById("qr-code-img").src = `data:image/png;base64,${base64Code}`;
+                    imgEl.src = `data:image/png;base64,${base64Code}`;
                 }
             } else {
-                // Fallback dinâmico caso a API não devolva imagem, apenas o texto
-                document.getElementById("qr-code-img").src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCodeText)}`;
+                imgEl.src = fallbackUrl;
             }
             
             currentHash = data.hash || data.pix.hash;
